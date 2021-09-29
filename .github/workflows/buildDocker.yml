@@ -26,7 +26,7 @@ jobs:
         id: prep
         run: |
           # Name of the Docker Image. 
-          DOCKER_IMAGE=interlisp/${GITHUB_REPOSITORY#*/}
+          DOCKER_IMAGE=billstumbo/${GITHUB_REPOSITORY#*/}
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
           ## Do we want to use tags and or versions 
@@ -79,6 +79,19 @@ jobs:
           #  linux/arm/v7 -- Raspberry pi
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           # Push the result to DockerHub
-          push: true
+          push: false
           # tags to assign to the Docker image
           tags: ${{ steps.prep.outputs.tags }}
+      
+      - name: Extract Executable
+        id: extract
+        uses: shrink/actions-docker-extract@v1
+        with:
+          image: billstumbo/maiko:latest
+          path: /app/maiko/.
+
+      - name: Update Executable
+        uses: actions/upload-artifact@v2
+        with:
+          path: ${{ steps.extract.outputs.destination }}
+          name: dist
