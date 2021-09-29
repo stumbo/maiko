@@ -8,7 +8,7 @@ name: 'Build Maiko Docker image'
 on:
   push:
     branches:
-      - master
+      - master, buildRelease
 
 #  Jobs that are run as part of this workflow.
 jobs:
