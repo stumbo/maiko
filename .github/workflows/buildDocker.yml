@@ -6,9 +6,9 @@ name: 'Build Maiko Docker image'
 # Run this workflow on push to master
 # Other branches can be added it needed. 
 on:
-  push:
-    branches:
-      - master, buildRelease
+  [push, pull_request]
+#    branches:
+#      - master, buildRelease
 
 #  Jobs that are run as part of this workflow.
 jobs:
