@@ -82,16 +82,18 @@ jobs:
           push: false
           # tags to assign to the Docker image
           tags: ${{ steps.prep.outputs.tags }}
+          outputs: type=local,dest=/tmp/medley.tar
       
       - name: Extract Executable
         id: extract
         uses: shrink/actions-docker-extract@v1
         with:
           image: billstumbo/maiko:latest
-          path: /app/maiko/.
+          path: /app/maiko/linux.x86_64/.
 
       - name: Update Executable
         uses: actions/upload-artifact@v2
         with:
           path: ${{ steps.extract.outputs.destination }}
           name: dist
+          retention-days: 5
