@@ -13,6 +13,7 @@ COPY --chown=nonroot:nonroot . /app/maiko
 RUN rm -rf /app/maiko/linux*
 
 WORKDIR /app/maiko/bin
-RUN ./makeright x
+RUN ./makeright x  && ./makeright init
 
-RUN rm -rf /app/maiko/inc /app/maiko/include /app/maiko/src
+RUN rm -rf /app/maiko/inc /app/maiko/include /app/maiko/src /app/maiko/build \
+           /app/maiko/linux.x86_64-x /app/maiko/init-linux.x86_64
